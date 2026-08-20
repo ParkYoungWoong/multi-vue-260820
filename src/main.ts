@@ -2,5 +2,9 @@ import { createApp } from 'vue'
 import './style.css'
 import App from './App.vue'
 import routes from './routes'
+import { createPinia } from 'pinia'
 
-createApp(App).use(routes).mount('#app')
+const app = createApp(App)
+app.use(routes)
+app.use(createPinia())
+app.mount('#app')

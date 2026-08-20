@@ -45,6 +45,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/count-store': RouteRecordInfo<
+      '/count-store',
+      '/count-store',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/movies/': RouteRecordInfo<
       '/movies/',
       '/movies',
@@ -83,6 +90,14 @@ declare module 'vue-router/auto-routes' {
     'src/pages/computed.vue': {
       routes:
         | '/computed'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'src/pages/count-store.vue': {
+      routes:
+        | '/count-store'
       views:
         | never
       pathParamNames:
