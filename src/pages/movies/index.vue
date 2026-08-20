@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { RouterLink } from 'vue-router'
 
 export interface ResponseData {
   Search: Movie[]
@@ -27,10 +28,6 @@ async function fetchMovies(event: KeyboardEvent | MouseEvent) {
 
 <template>
   <div>
-    <textarea></textarea>
-    <div contenteditable>
-      <span style="color: red">Hello world</span>
-    </div>
     <div>
       <input
         ref="inputRef"
@@ -42,13 +39,12 @@ async function fetchMovies(event: KeyboardEvent | MouseEvent) {
         @click="fetchMovies">
         검색
       </button>
-      <div>{{ searchText }}</div>
     </div>
     <ul>
       <li
         v-for="(movie, index) in movies"
         :key="movie.imdbID">
-        {{ index + 1 }}: {{ movie.Title }}
+        <RouterLink :to="`/movies/${movie.imdbID}`">{{ index + 1 }}: {{ movie.Title }}</RouterLink>
       </li>
     </ul>
   </div>

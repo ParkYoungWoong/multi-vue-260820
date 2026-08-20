@@ -38,11 +38,25 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/computed': RouteRecordInfo<
+      '/computed',
+      '/computed',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/movies/': RouteRecordInfo<
       '/movies/',
       '/movies',
       Record<never, never>,
       Record<never, never>,
+      | never
+    >,
+    '/movies/[movieId]': RouteRecordInfo<
+      '/movies/[movieId]',
+      '/movies/:movieId',
+      { movieId: ParamValue<true> },
+      { movieId: ParamValue<false> },
       | never
     >,
   }
@@ -66,6 +80,14 @@ declare module 'vue-router/auto-routes' {
       pathParamNames:
         | never
     }
+    'src/pages/computed.vue': {
+      routes:
+        | '/computed'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
     'src/pages/movies/index.vue': {
       routes:
         | '/movies/'
@@ -73,6 +95,14 @@ declare module 'vue-router/auto-routes' {
         | never
       pathParamNames:
         | never
+    }
+    'src/pages/movies/[movieId].vue': {
+      routes:
+        | '/movies/[movieId]'
+      views:
+        | never
+      pathParamNames:
+        | 'movieId'
     }
   }
 
