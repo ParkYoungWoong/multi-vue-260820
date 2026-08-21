@@ -1,5 +1,5 @@
 function a() {
-  console.log(this) // 호출할 때!
+  // console.log(this) // 호출할 때!
   return 1
 }
 const b = () => {

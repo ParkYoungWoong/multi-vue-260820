@@ -1,3 +1,13 @@
-class Person {}
+let user = null
+console.log(user)
 
-const person: Person = new Person()
+const res = await fetch('https://~~~')
+const data = await res.json()
+user = data
+
+if (user) {
+  console.log(user.name)
+}
+
+console.log(typeof {}) // 'object'
+console.log(typeof null) // 'object'

@@ -1,7 +1,7 @@
 ---
 name: create-vue-component
 description: 'Vue 컴포넌트를 만들 때 사용하는 스킬, Composition API 기반 컴포넌트'
-model: sonnet
+model: haiku
 effort: high
 ---
 
