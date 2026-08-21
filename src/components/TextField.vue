@@ -3,6 +3,7 @@
 
 interface Props {
   message?: string
+  // modelValue?: string
 }
 
 const { message = '' } = defineProps<Props>()
@@ -14,6 +15,7 @@ const abc = defineModel<string>()
   <label>
     <input
       v-model="abc"
+      v-bind="$attrs"
       type="text" />
     <span>{{ message }}</span>
   </label>

@@ -66,6 +66,13 @@ declare module 'vue-router/auto-routes' {
       { movieId: ParamValue<false> },
       | never
     >,
+    '/signin': RouteRecordInfo<
+      '/signin',
+      '/signin',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
   }
 
   /**
@@ -118,6 +125,14 @@ declare module 'vue-router/auto-routes' {
         | never
       pathParamNames:
         | 'movieId'
+    }
+    'src/pages/signin.vue': {
+      routes:
+        | '/signin'
+      views:
+        | never
+      pathParamNames:
+        | never
     }
   }
 
