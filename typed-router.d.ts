@@ -38,6 +38,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/[...notFound]': RouteRecordInfo<
+      '/[...notFound]',
+      '/:notFound(.*)',
+      { notFound: ParamValue<true> },
+      { notFound: ParamValue<false> },
+      | never
+    >,
     '/computed': RouteRecordInfo<
       '/computed',
       '/computed',
@@ -93,6 +100,14 @@ declare module 'vue-router/auto-routes' {
         | never
       pathParamNames:
         | never
+    }
+    'src/pages/[...notFound].vue': {
+      routes:
+        | '/[...notFound]'
+      views:
+        | never
+      pathParamNames:
+        | 'notFound'
     }
     'src/pages/computed.vue': {
       routes:

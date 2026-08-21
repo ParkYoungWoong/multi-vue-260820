@@ -4,6 +4,7 @@ export const requiresAuth = {
   guard(to: RouteLocationNormalizedGeneric) {
     if (to.meta.auth) {
       const token = localStorage.getItem('token')
+      // await isValideToken(token)
       console.log(token)
       return !!token
     }

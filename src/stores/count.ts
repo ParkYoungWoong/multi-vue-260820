@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 
+// Optinos Store 방식
 export const useCountStore = defineStore('count', {
   state: () => {
     return {
