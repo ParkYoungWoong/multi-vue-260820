@@ -166,23 +166,58 @@ TextField는 루트가 `<label>` 하나라 `name` 같은 속성이 label과 inpu
 
 ---
 
+### 13. 상세 페이지끼리 이동하면 데이터가 갱신되지 않습니다
+
+`src/pages/movies/[movieId].vue:15-20`
+
+`fetchMovie`를 `setup`에서 한 번만 호출합니다.
+vue-router는 경로 패턴이 같고 param만 바뀌면 컴포넌트 인스턴스를 재사용하므로 `setup`이 다시 실행되지 않습니다.
+따라서 `/movies/tt0068646`에서 `/movies/tt0111161`로 이동해도 이전 영화가 그대로 남습니다.
+
+현재는 상세에서 다른 상세로 가는 링크가 없어 드러나지 않지만, 추천 목록 같은 것을 붙이면 바로 재현됩니다.
+
+제안: `watch(() => route.params.movieId, ..., { immediate: true })`로 param을 감시합니다.
+
+또한 17행의 `.catch(() => {})`는 오류를 완전히 삼킵니다. 화면 분기는 되지만 원인 추적 단서가 남지 않습니다.
+
+### 14. 타입 단언이 타입 검사를 무력화합니다
+
+`src/pages/signin.vue:13-14`
+
+```ts
+const id = formData.get('id') as string
+```
+
+`formData.get()`의 반환 타입은 `FormDataEntryValue | null`입니다.
+`as string`으로 눌러 놨기 때문에 해당 input이 사라지면 17행 `id.trim()`이 런타임에 터집니다.
+`String(formData.get('id') ?? '')`처럼 값을 좁히는 편이 안전합니다.
+
+### 15. 로그인 폼에 autocomplete 속성이 없습니다
+
+`src/pages/signin.vue:31-34`
+
+아이디에 `autocomplete="username"`, 비밀번호에 `autocomplete="current-password"`를 주면
+비밀번호 관리자가 필드를 인식합니다. 접근성 검사에서도 확인하는 항목입니다.
+
+---
+
 ## 낮음
 
-### 13. lint, format 스크립트가 없습니다
+### 16. lint, format 스크립트가 없습니다
 
 `package.json:6-10`
 
 eslint와 prettier가 devDependencies에 있는데 실행 스크립트는 `dev`, `build`, `preview` 뿐입니다.
 팀 공유와 CI를 생각하면 `"lint": "eslint ."`, `"format": "prettier --write ."` 정도는 있는 편이 좋습니다.
 
-### 14. 이벤트 이름이 의미를 담고 있지 않습니다
+### 17. 이벤트 이름이 의미를 담고 있지 않습니다
 
 `src/components/TheButton.vue:7`
 
 `defineEmits(['xyz', 'hello'])`는 학습용 이름으로 보입니다.
 `click`, `message-click`처럼 의도가 드러나는 이름을 권합니다.
 
-### 15. 학습용 스캐폴딩 파일이 남아 있습니다
+### 18. 학습용 스캐폴딩 파일이 남아 있습니다
 
 `src/Template.vue`, `src/components/Parent.vue`, `src/components/Child.vue`,
 `src/components/TheLoader.vue`, `src/pages/computed.vue`, `tests/test1.ts` ~ `tests/test5.ts`
@@ -191,13 +226,13 @@ eslint와 prettier가 devDependencies에 있는데 실행 스크립트는 `dev`,
 특히 `src/pages/computed.vue`는 파일 기반 라우팅 때문에 `/computed` 경로로 실제 접근이 가능합니다.
 `tests/` 디렉터리는 테스트 코드가 아니라 JS 문법 연습 파일이라, 이름과 내용이 어긋납니다.
 
-### 16. 문서와 메타 정보가 템플릿 기본값입니다
+### 19. 문서와 메타 정보가 템플릿 기본값입니다
 
 - `index.html:31`: `<title>multi1</title>`
 - `README.md`: Vite 기본 템플릿 내용 그대로. 실행 방법과 환경변수 안내가 없습니다.
 - `package.json:2`: `"name": "multi1"`
 
-### 17. 쓰이지 않는 alias가 있습니다
+### 20. 쓰이지 않는 alias가 있습니다
 
 `vite.config.ts:11`, `tsconfig.app.json:13`
 
